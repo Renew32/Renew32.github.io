@@ -9,3 +9,46 @@
     60% { transform: rotate(15deg); }
     100% { transform: rotate(0deg); }
   }
+
+  ._hero-content {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero-text {
+    opacity: 1;
+    transform: none;
+  }
+  
+  ._name span {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 2rem;
+  }
+  
+  .wave img {
+    vertical-align: middle;
+    animation: waveAnimation 2s infinite;
+  }
+  
+  /* Optionnel : animation de "wave" */
+  @keyframes waveAnimation {
+    0% { transform: rotate(0deg); }
+    20% { transform: rotate(15deg); }
+    40% { transform: rotate(-10deg); }
+    60% { transform: rotate(15deg); }
+    100% { transform: rotate(0deg); }
+  }
+  
+  .hero-overlay {
+    position: absolute;
+    inset: 4px 0 4px 100%;
+    opacity: 0.5;
+    border-radius: 30px;
+    background: var(--theme-gradient);
+  }
