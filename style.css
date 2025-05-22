@@ -1,0 +1,163 @@
+
+
+/*--- BLOCK WAVE DE LA MAIN ---- */
+.wave{
+  display: inline-block;
+  transform: rotate(45deg); /* Position initiale à 15° */
+  transform-origin: 70% 70%;
+  transition: transform 0.3s ease;
+}
+
+.wave img {
+  animation: waveAnimation 2.8s ease-in-out forwards;
+  display: inline-block;
+  transform-origin: 70% 70%;
+}
+
+@keyframes waveAnimation {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(15deg); }
+  40% { transform: rotate(-10deg); }
+  60% { transform: rotate(15deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/*--- FIN BLOCK WAVE DE LA MAIN ---- */
+
+
+/* Style des lettres individuelles du prénom */
+.animated-name span[style^="--i"] {
+  display: inline-block;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: clamp(30px, 6vw, 50px);
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+  animation-delay: calc(var(--i) * 0.1s);
+}
+
+/* Animation de fade-in des lettres */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body{
+  font-family: 'Times New Roman', Times, serif;
+
+}
+
+/*--- BLOCK skills ---- */
+.ml-card, .django-card {
+  border-radius: 20px;
+}
+
+.logo-card {
+  width: 100%;
+  max-width: 600px;
+  padding: 30px;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+.skills-title {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  border-bottom: 3px solid #007BFF;
+  display: inline-block;
+  padding-bottom: 5px;
+  margin: 0;
+}
+
+
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+}
+
+.logo-grid img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.logo-grid img:hover {
+  transform: scale(1.15);
+}
+
+/*--- FIN BLOCK skills ---- */
+
+
+/*--- BLOCK carte projets ---- */
+.card-deck {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 50px 20px;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 200px;
+  height: 300px;
+  perspective: 1000px;
+  border-radius: 20px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
+  border-radius: 20px;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.flip-card-front img {
+  width: 100%;
+  height: 100%;
+}
+
+.flip-card-back {
+  background-color: #ffffff;
+  color: #333;
+  transform: rotateY(180deg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/*--- FIN BLOCK carte projets ---- */
