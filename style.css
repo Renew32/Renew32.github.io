@@ -48,12 +48,20 @@
   }
 }
 
-body{
+body {
   font-family: 'Times New Roman', Times, serif;
-
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgb(16, 11, 29);
 }
 
+
 /*--- BLOCK skills ---- */
+.skills-section{
+  padding-top: 255px;
+}
+
 .ml-card, .django-card {
   border-radius: 20px;
 }
@@ -68,14 +76,16 @@ body{
   align-items: center;
   box-sizing: border-box;
 }
+
+
 .skills-title {
   margin-bottom: 20px;
   text-align: center;
   font-size: 32px;
   font-weight: bold;
-  color: #333;
   text-transform: uppercase;
   border-bottom: 3px solid #007BFF;
+  color: black;
   display: inline-block;
   padding-bottom: 5px;
   margin: 0;
@@ -110,7 +120,7 @@ body{
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
-  padding: 50px 20px;
+  padding-top: 255px;
 }
 
 .flip-card {
@@ -161,3 +171,75 @@ body{
   align-items: center;
 }
 /*--- FIN BLOCK carte projets ---- */
+
+.experience-card {
+  background: #1e1e2f;
+  color: #ffffff;
+  border-radius: 15px;
+  padding: 2rem;
+  margin: 2rem auto;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  max-width: 800px;
+}
+.experience-card:hover {
+  transform: translateY(-5px);
+}
+
+.experience-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.company-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.company-name {
+  margin: 0;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.role {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-bottom: 0;
+}
+
+.description {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.tag {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+#ft2 {
+  margin-top: 20px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  padding-top: 50px;
+}
+
+.experiences-section{
+  padding-top: 250px;
+}
