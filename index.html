@@ -5,217 +5,316 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Antoine Missoup Konga - Portfolio</title>
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="hi.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
   <!-- Style perso -->
   <link rel="stylesheet" href="style.css">
-
 
   <!-- AOS -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
 
-  <nav class="navbar navbar-expand-md fixed-top top-navbar py-3">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg fixed-top top-navbar py-3">
     <div class="container">
-      <a class="navbar-brand text-light" href="#">Antoine Portfolio</a>
-      <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <a class="navbar-brand" href="#">
+        <span class="brand-text">Antoine</span>
+        <span class="brand-dot">.</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="toggler-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
       </button>
 
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-        <ul class="navbar-nav text-center">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link text-light" href="#about-me">About Me</a>
+            <a class="nav-link active" href="#about-me">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="#skills">Skills</a>
+            <a class="nav-link" href="#skills">Skills</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="#experiences">Experience</a>
+            <a class="nav-link" href="#experiences">Experience</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="#projects">Projects</a>
+            <a class="nav-link" href="#projects">Projects</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="The_Antoine Resume1.pdf" target="_blank">Resume</a>
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+          <li class="nav-item ms-lg-3">
+            <a class="btn btn-resume" href="The_Antoine Resume1.pdf" target="_blank">
+              <i class="bi bi-file-earmark-text me-1"></i> Resume
+            </a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <div class="container-fluid">
-    
-
-    <div class="row mt-5" id="about-me">
-      <section class="about-me-section py-5 text-light">
-        <div class="container">
-          <div class="row align-items-center">
-
-            <div class="row justify-content-center">
-              <div class="col-md-8">
-                <div class="_hero-content" data-aos="fade-down" data-aos-duration="900">
-                  <div class="hero-wrapper position-relative">
-                    <div class="hero-text text-center text-light py-5">
-                      <h1 class="animated-name">
-                        <span>Hey, I'm </span>
-                        <span style="--i:0">A</span>
-                        <span style="--i:1">n</span>
-                        <span style="--i:2">t</span>
-                        <span style="--i:3">o</span>
-                        <span style="--i:4">i</span>
-                        <span style="--i:5">n</span>
-                        <span style="--i:6">e</span>
-                        <span class="wave">
-                          <img src="hi.png" id="main" alt="Wave emoji" width="60" height="60">
-                        </span>
-                      </h1>
-                    </div>
-                  </div>
+  <!-- Hero Section -->
+  <section class="hero-section" id="about-me">
+    <div class="hero-bg-gradient"></div>
+    <div class="container">
+      <div class="row align-items-center min-vh-100">
+        <div class="col-lg-7 hero-content" data-aos="fade-right" data-aos-duration="1000">
+          <p class="hero-greeting">Hello, I'm</p>
+          <h1 class="hero-name">
+            Antoine
+            <span class="wave">
+              <img src="hi.png" alt="Wave emoji" width="50" height="50">
+            </span>
+          </h1>
+          <h2 class="hero-title">Software Engineering Student</h2>
+          <p class="hero-description">
+            Passionate about solving problems and building software that makes a difference. 
+            Currently exploring frontend development, UI/UX design, and the fascinating world of Machine Learning.
+          </p>
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary-custom me-3">
+              <i class="bi bi-folder me-2"></i>View Projects
+            </a>
+            <a href="#contact" class="btn btn-outline-custom">
+              <i class="bi bi-envelope me-2"></i>Get in Touch
+            </a>
+          </div>
+          <div class="hero-social mt-4">
+            <a href="https://www.linkedin.com/in/antoine-missoup/" target="_blank" class="social-link" aria-label="LinkedIn" data-testid="social-linkedin">
+              <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="https://github.com/Renew32" target="_blank" class="social-link" aria-label="GitHub" data-testid="social-github">
+              <i class="bi bi-github"></i>
+            </a>
+            <a href="mailto:antoinemissoupg@gmail.com" class="social-link" aria-label="Email" data-testid="social-email">
+              <i class="bi bi-envelope"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-5 d-flex justify-content-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
+          <div class="hero-card-wrapper">
+            <div class="flip-card hero-flip-card">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <img src="assets/card/AS.png" alt="Antoine" class="img-fluid"/>
                 </div>
-              </div>
-            </div>
-      
-
-            <div class="col-md-6 text-center text-md-center" data-aos="fade-up" data-aos-delay="100">
-              <h2 class="about-title mb-4">About me</h2>
-              <p>I'm Antoine, a Software Engineering student at the University of Ottawa. 
-                I love solving problems and learning about tech, design, and how software can make lives better.
-                I'm currently building projects and improving my UI/UX skills while exploring frontend development. 
-                I want to learn more about Machine Learning and how AI can help the world.
-                I'm interresing about finance, sports and business especially on how Software Engineering can help in those fields</p>
-            </div>
-      
-
-            <div class="col-md-6 d-flex justify-content-center justify-content-md-end pe-md-5" data-aos="zoom-in" data-aos-delay="200" id="as-img">
-              <div class="flip-card" data-aos="zoom-in" data-aos-delay="100">
-                <div class="flip-card-inner">
-                  <div class="flip-card-front">
-                    <img src="assets/card/AS.png" alt="AS" class="as-img img-fluid rounded"/>
-                  </div>
-
-                  <div class="flip-card-back" id="card1-img2" style="background-color: #100b1d;">
-                    <a href="The_Antoine Resume1.pdf" target="_blank" class="card-link" style="text-decoration: none; color: white;">
-                      Click Here For <br>
-                      My Resume
+                <div class="flip-card-back">
+                  <div class="card-back-content">
+                    <i class="bi bi-file-earmark-person fs-1 mb-3"></i>
+                    <h5>View My Resume</h5>
+                    <p class="small">Click to download</p>
+                    <a href="The_Antoine Resume1.pdf" target="_blank" class="btn btn-light btn-sm mt-2">
+                      <i class="bi bi-download me-1"></i> Download
                     </a>
                   </div>
-
                 </div>
               </div>
             </div>
-
           </div>
         </div>
-      </section>
-
-      <section class="skills-section" id="skills">
-        <div class="container">
-          <div class="row align-items-center">
-
-            <div class="col-md-6 text-center" data-aos="flip-up" data-aos-duration="900">
-              <h2 class="skills-title text-light mb-4">Skills</h2>
-              <div class="logo-card mx-auto">
-                <div class="logo-grid">
-                  <img src="assets/skills/ML.jpeg" alt="Machine Learning">
-                  <img src="assets/skills/django.jpg" alt="Django">
-                  <img src="assets/skills/Node.js_logo.svg.png" alt="Node.js">
-                  <img src="assets/skills/HTML-CSS.png" alt="HTML & CSS">
-                  <img src="assets/skills/C_logo.png" alt="C Programming">
-                  <img src="assets/skills/javascript.png" alt="JavaScript">
-                  <img src="assets/skills/python.png" alt="Python">
-                  <img src="assets/skills/Java_Logo.svg.png" alt="Java">
-                  <img src="assets/skills/SQL.png" alt="SQL">
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6" data-aos="fade-left" data-aos-duration="900">
-              <div class="how-i-work text-light">
-                <p>My approach to every project is driven by clarity, structure, and curiosity.</p>
-                <ul>
-                  <li><strong>Strategic planning:</strong> I take time to understand the problem and define clear goals.</li>
-                  <li><strong>Thoughtful development:</strong> I write clean, maintainable, and scalable code using industry best practices.</li>
-                  <li><strong>Agile iteration:</strong> I constantly test, refine, and improve solutions based on feedback and results.</li>
-                  <li><strong>Continuous learning:</strong> I stay up to date with new technologies and welcome constructive feedback.</li>
-                </ul>
-                <p>I thrive in collaborative environments where ideas are shared openly and teams work together to deliver impactful results 🤝.</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
+    <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="1000">
+      <a href="#skills">
+        <div class="mouse">
+          <div class="wheel"></div>
+        </div>
+        <span>Scroll Down</span>
+      </a>
+    </div>
+  </section>
 
+  <!-- Skills Section -->
+  <section class="skills-section section-padding" id="skills">
+    <div class="container">
+      <div class="section-header text-center" data-aos="fade-up">
+        <span class="section-subtitle">What I Know</span>
+        <h2 class="section-title">Skills & Expertise</h2>
+      </div>
+      
+      <div class="row g-4 mt-4">
+        <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
+          <div class="skills-card">
+            <h3 class="skills-card-title">
+              <i class="bi bi-code-slash me-2"></i>Technical Skills
+            </h3>
+            <div class="skills-grid">
+              <div class="skill-item">
+                <img src="assets/skills/python.png" alt="Python">
+                <span>Python</span>
+              </div>
+              <div class="skill-item">
+                <img src="assets/skills/Java_Logo.svg.png" alt="Java">
+                <span>Java</span>
+              </div>
+              <div class="skill-item">
+                <img src="assets/skills/javascript.png" alt="JavaScript">
+                <span>JavaScript</span>
+              </div>
+              <div class="skill-item">
+                <img src="assets/skills/HTML-CSS.png" alt="HTML & CSS">
+                <span>HTML/CSS</span>
+              </div>
+              <div class="skill-item">
+                <img src="assets/skills/Node.js_logo.svg.png" alt="Node.js">
+                <span>Node.js</span>
+              </div>
+              <div class="skill-item">
+                <img src="assets/skills/django.jpg" alt="Django">
+                <span>Django</span>
+              </div>
+              <div class="skill-item">
+                <img src="assets/skills/SQL.png" alt="SQL">
+                <span>SQL</span>
+              </div>
+              <div class="skill-item">
+                <img src="assets/skills/C_logo.png" alt="C">
+                <span>C</span>
+              </div>
+              <div class="skill-item">
+                <img src="assets/skills/ML.jpeg" alt="Machine Learning">
+                <span>ML</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800">
+          <div class="approach-card">
+            <h3 class="approach-title">
+              <i class="bi bi-lightbulb me-2"></i>How I Work
+            </h3>
+            <div class="approach-list">
+              <div class="approach-item">
+                <div class="approach-icon">
+                  <i class="bi bi-bullseye"></i>
+                </div>
+                <div class="approach-content">
+                  <h5>Strategic Planning</h5>
+                  <p>Understanding problems deeply and defining clear, achievable goals.</p>
+                </div>
+              </div>
+              <div class="approach-item">
+                <div class="approach-icon">
+                  <i class="bi bi-code-square"></i>
+                </div>
+                <div class="approach-content">
+                  <h5>Clean Development</h5>
+                  <p>Writing maintainable, scalable code following best practices.</p>
+                </div>
+              </div>
+              <div class="approach-item">
+                <div class="approach-icon">
+                  <i class="bi bi-arrow-repeat"></i>
+                </div>
+                <div class="approach-content">
+                  <h5>Agile Iteration</h5>
+                  <p>Continuously testing and improving based on feedback.</p>
+                </div>
+              </div>
+              <div class="approach-item">
+                <div class="approach-icon">
+                  <i class="bi bi-book"></i>
+                </div>
+                <div class="approach-content">
+                  <h5>Continuous Learning</h5>
+                  <p>Staying current with new technologies and embracing growth.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section class="experiences-section" id="experiences">
-
-      <div class="text-center" data-aos-duration="900">
-        <h2 class="experience-title text-light mb-4">Experience</h2>
+  <!-- Experience Section -->
+  <section class="experiences-section section-padding" id="experiences">
+    <div class="container">
+      <div class="section-header text-center" data-aos="fade-up">
+        <span class="section-subtitle">My Journey</span>
+        <h2 class="section-title">Experience</h2>
       </div>
 
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-md-6 mb-4">
-            <div class="experience-card" data-aos="fade-up" data-aos-duration="1000">
+      <div class="experience-timeline mt-5">
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="experience-card">
+              <div class="experience-year">2023</div>
               <div class="experience-header">
                 <img src="assets/card/ab.webp" alt="Android App" class="company-logo">
                 <div>
                   <h5 class="company-name">Android Mobile App</h5>
-                  <p class="role">Personal Project · 2023</p>
+                  <p class="role">Personal Project</p>
                 </div>
               </div>
               <p class="description">
-                Developed a fully functional mobile application using Java and Android Studio. Integrated SQLite for local data storage and Firebase for real-time sync. Documented the architecture with UML diagrams.
+                Developed a fully functional mobile application using Java and Android Studio. Integrated SQLite for local data storage and Firebase for real-time sync.
               </p>
               <div class="tags">
-                <span class="tag java">Java</span>
-                <span class="tag sql">SQL</span>
+                <span class="tag">Java</span>
+                <span class="tag">SQL</span>
                 <span class="tag">Firebase</span>
                 <span class="tag">Android Studio</span>
-                <span class="tag">XML</span>
               </div>
             </div>
           </div>
 
-          <div class="col-12 col-md-6 mb-4">
-            <div class="experience-card" data-aos="fade-up" data-aos-duration="1000">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="experience-card">
+              <div class="experience-year">2025</div>
               <div class="experience-header">
                 <img src="assets/card/negJok.webp" alt="CHANAS" class="company-logo">
                 <div>
                   <h5 class="company-name">CHANAS Web Platform</h5>
-                  <p class="role">Group Project · 2025</p>
+                  <p class="role">Group Project</p>
                 </div>
               </div>
               <p class="description">
-                Contributed to the development of a dynamic web platform for the CHANAS initiative, focused on showcasing humanitarian aid projects. Built interactive UI components and integrated project data using modern web technologies.
+                Contributed to a dynamic web platform for the CHANAS initiative, showcasing humanitarian aid projects with interactive UI components.
               </p>
               <div class="tags">
                 <span class="tag">HTML</span>
                 <span class="tag">CSS</span>
                 <span class="tag">JavaScript</span>
-                <span class="tag">Git</span>
-                 <span class="tag">SQL</span>
                 <span class="tag">UI/UX</span>
               </div>
             </div>
           </div>
 
-            <div class="experience-card" data-aos="fade-up" data-aos-duration="1000">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="experience-card">
+              <div class="experience-year">2025</div>
               <div class="experience-header">
-                <img src="assets/card/JOKO.webp" alt="CHANAS" class="company-logo">
+                <img src="assets/card/JOKO.webp" alt="Equity BCDC" class="company-logo">
                 <div>
                   <h5 class="company-name">Equity BCDC</h5>
-                  <p class="role">Group Project · 2025</p>
+                  <p class="role">Group Project</p>
                 </div>
               </div>
               <p class="description">
-                Delivered financial dashboards in Power BI and SQL-based semantic models. Developed custom PowerApps to automate complex processes for risk and operations teams.
+                Delivered financial dashboards in Power BI and SQL-based semantic models. Developed custom PowerApps for risk and operations teams.
               </p>
+              <div class="tags">
                 <span class="tag">SQL</span>
                 <span class="tag">Power BI</span>
                 <span class="tag">Python</span>
@@ -223,88 +322,177 @@
               </div>
             </div>
           </div>
-
-        </div>
-
-      </div>
-    </section>
-
-
-
-    <section class="card-deck" data-aos="fade-up" data-aos-duration="3000" id="projects">
-      <div class="container">
-        <div class="text-center" data-aos-duration="900">
-          <h2 class="Projects-title text-light mb-4">Projects</h2>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="flip-card" data-aos="zoom-in">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <img src="assets/card/JOKO.webp" alt="Joker Orange Card">
+  <!-- Projects Section -->
+  <section class="projects-section section-padding" id="projects">
+    <div class="container">
+      <div class="section-header text-center" data-aos="fade-up">
+        <span class="section-subtitle">My Work</span>
+        <h2 class="section-title">Featured Projects</h2>
+      </div>
+
+      <div class="projects-grid mt-5">
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="project-card">
+              <div class="project-image">
+                <img src="assets/card/JOKO.webp" alt="Service Website">
+                <div class="project-overlay">
+                  <a href="https://canadianc.onrender.com" target="_blank" class="project-link">
+                    <i class="bi bi-box-arrow-up-right"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="project-info">
+                <h4>Service Website</h4>
+                <p>Professional service business presentation platform.</p>
+                <div class="project-tech">
+                  <span>HTML</span>
+                  <span>CSS</span>
+                  <span>JS</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="flip-card-back">
-            <a href="https://canadianc.onrender.com" target="_blank" class="card-link" style="text-decoration: none;">
-              <h4>Service Website</h4>
-              <p>Presentation for a professional service business.</p>
-            </a>
+
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="project-card">
+              <div class="project-image">
+                <img src="assets/card/JOKERV.webp" alt="Game">
+                <div class="project-overlay">
+                  <a href="https://flipnmatch.onrender.com" target="_blank" class="project-link">
+                    <i class="bi bi-box-arrow-up-right"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="project-info">
+                <h4>Flip & Match Game</h4>
+                <p>Interactive mini game built with React.</p>
+                <div class="project-tech">
+                  <span>React</span>
+                  <span>CSS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+            <div class="project-card">
+              <div class="project-image">
+                <img src="assets/card/jOKHOLO.webp" alt="E-commerce">
+                <div class="project-overlay">
+                  <a href="https://thriftgaming.onrender.com" target="_blank" class="project-link">
+                    <i class="bi bi-box-arrow-up-right"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="project-info">
+                <h4>E-commerce Store</h4>
+                <p>Online shop for digital and physical goods.</p>
+                <div class="project-tech">
+                  <span>Node.js</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="project-card">
+              <div class="project-image">
+                <img src="assets/card/Rocketjok.webp" alt="Analytics">
+                <div class="project-overlay">
+                  <a href="https://analiz-aff7.onrender.com" target="_blank" class="project-link">
+                    <i class="bi bi-box-arrow-up-right"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="project-info">
+                <h4>Analytics</h4>
+                <p>Data visualization for sport analytics.</p>
+                <div class="project-tech">
+                  <span>Python</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="flip-card" data-aos="zoom-in" data-aos-delay="100">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <img src="assets/card/JOKERV.webp" alt="Joker Violet Card">
-          </div>
-          <div class="flip-card-back">
-            <a href="https://flipnmatch.onrender.com" target="_blank" class="card-link" style="text-decoration: none;">
-              <h4>GAME</h4>
-              <p>Mini game designed with React.</p>
-            </a>
+  <!-- Contact Section -->
+  <section class="contact-section section-padding" id="contact">
+    <div class="container">
+      <div class="section-header text-center" data-aos="fade-up">
+        <span class="section-subtitle">Get In Touch</span>
+        <h2 class="section-title">Let's Connect</h2>
+      </div>
+
+      <div class="row justify-content-center mt-5">
+        <div class="col-lg-8">
+          <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+            <p class="contact-text text-center">
+              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+              Feel free to reach out!
+            </p>
+            <div class="contact-links">
+              <a href="mailto:antoinemissoupg@gmail.com" class="contact-item" data-testid="contact-email">
+                <div class="contact-icon">
+                  <i class="bi bi-envelope"></i>
+                </div>
+                <div class="contact-info">
+                  <span class="contact-label">Email</span>
+                  <span class="contact-value">antoinemissoupg@gmail.com</span>
+                </div>
+              </a>
+              <a href="https://www.linkedin.com/in/antoine-missoup/" target="_blank" class="contact-item" data-testid="contact-linkedin">
+                <div class="contact-icon">
+                  <i class="bi bi-linkedin"></i>
+                </div>
+                <div class="contact-info">
+                  <span class="contact-label">LinkedIn</span>
+                  <span class="contact-value">Connect with me</span>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="flip-card" data-aos="zoom-in" data-aos-delay="200">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <img src="assets/card/jOKHOLO.webp" alt="Jokholo Card">
-          </div>
-          <div class="flip-card-back">
-            <a href="https://thriftgaming.onrender.com" target="_blank" class="card-link" style="text-decoration: none;">
-              <h4>E-commerce</h4>
-              <p>Simple online shop for digital or physical goods.</p>
-            </a>
-          </div>
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="brand-text">Antoine</span>
+          <span class="brand-dot">.</span>
         </div>
-      </div>
-
-      <div class="flip-card" data-aos="zoom-in" data-aos-delay="300">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <img src="assets/card/Rocketjok.webp" alt="Rocket Joker Card">
-          </div>
-          <div class="flip-card-back">
-            <a href="https://analiz-aff7.onrender.com" target="_blank" class="card-link" style="text-decoration: none;">
-              <h4>Finance/Sport Site</h4>
-              <p>Data visualization for business or sport analytics.</p>
-            </a>
-          </div>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/antoine-missoup/" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="https://github.com/Renew32" target="_blank" aria-label="GitHub"><i class="bi bi-github"></i></a>
+          <a href="mailto:antoinemissoupg@gmail.com" aria-label="Email"><i class="bi bi-envelope"></i></a>
         </div>
+        <p class="footer-copyright">
+          © 2026 Antoine Missoup Konga. All rights reserved.
+        </p>
       </div>
-    </section>
+    </div>
+  </footer>
 
-
-  </div>
+  <!-- Scroll to Top Button -->
+  <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script src="app.js"></script>
-
-  <div class="footer" id="ft2">
-    ©2025 - Portfolio By Antoine Missoup Konga
-  </div>
 </body>
 </html>
