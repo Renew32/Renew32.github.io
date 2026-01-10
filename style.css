@@ -70,6 +70,7 @@ body {
   font-weight: 700;
 }
 
+/* Brand MARK */
 .brand-text {
   color: var(--text-light);
 }
@@ -78,6 +79,7 @@ body {
   color: var(--primary-color);
   font-size: 2rem;
 }
+/* Brand MARK */
 
 .nav-link {
   color: var(--text-muted) !important;
