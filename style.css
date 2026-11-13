@@ -742,11 +742,11 @@ body.is-deep .nav.scrolled { background: rgba(2, 26, 29, 0.6); color: #e6fffa; }
 .hand { display: flex; justify-content: center; align-items: flex-end; max-width: 1180px; margin: 0 auto; padding: 0 10px; }
 /* The slot is the stable hit area: it never moves on hover, only its contents do. */
 .j-slot {
-  --w: 178px;
+  --w: 162px;
   flex: none; width: var(--w); height: calc(var(--w) * 190 / 142);
   margin: 0 -4px;
   position: relative; z-index: 1;
-  transform: translateY(calc(var(--i) * var(--i) * 6px)) rotate(calc(var(--i) * 5deg));
+  transform: translateY(calc(var(--i) * var(--i) * 5px)) rotate(calc(var(--i) * 4.5deg));
 }
 .j-slot:hover, .j-slot:focus-within { z-index: 5; }
 .j-card { width: 100%; height: 100%; perspective: 1000px; cursor: pointer; outline: none; border-radius: 12px; }
@@ -760,8 +760,8 @@ body.is-deep .nav.scrolled { background: rgba(2, 26, 29, 0.6); color: #e6fffa; }
 }
 .j-card.flipped .j-inner { transform: rotateY(180deg); }
 @media (hover: hover) and (pointer: fine) {
-  .j-slot:hover .j-inner { transform: translateY(-30px) rotate(calc(var(--i) * -5deg)) scale(1.07); }
-  .j-slot:hover .j-card.flipped .j-inner { transform: translateY(-30px) rotate(calc(var(--i) * -5deg)) scale(1.07) rotateY(180deg); }
+  .j-slot:hover .j-inner { transform: translateY(-30px) rotate(calc(var(--i) * -4.5deg)) scale(1.07); }
+  .j-slot:hover .j-card.flipped .j-inner { transform: translateY(-30px) rotate(calc(var(--i) * -4.5deg)) scale(1.07) rotateY(180deg); }
 }
 .j-front, .j-back {
   position: absolute; inset: 0; border-radius: 12px; overflow: hidden;
@@ -785,7 +785,7 @@ body.is-deep .nav.scrolled { background: rgba(2, 26, 29, 0.6); color: #e6fffa; }
 .j-tag.mult { background: #fe5f55; }
 .j-tag.xmult { background: #fe5f55; box-shadow: inset 0 0 0 2px #fff; }
 .j-tag.money { background: #f5b143; color: #3a2a06; }
-@media (max-width: 1100px) { .j-slot { --w: 150px; } }
+@media (max-width: 1180px) { .j-slot { --w: 138px; } }
 @media (max-width: 900px) {
   .hand { flex-wrap: wrap; gap: 22px 16px; }
   .j-slot { --w: 158px; margin: 0; transform: none; }

@@ -240,7 +240,7 @@
 
   /* ---------- Typed roles ---------- */
   const typedEl = $("#typed");
-  const roles = ["Software Engineering Student", "Full-Stack Developer", "AI & Vibe Coder", "Co-President @ UOSSA", "Problem Solver"];
+  const roles = ["Software Engineering Student", "Co-President @ UOSSA", "Full-Stack Developer", "Problem Solver"];
   if (!reduceMotion) {
     let r = 0, c = roles[0].length, deleting = true;
     const loop = () => {
