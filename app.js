@@ -261,11 +261,12 @@
   /* ---------- Flip card (tap support) ---------- */
   const flip = $("#flipCard");
   flip.addEventListener("click", (e) => { if (!e.target.closest("a")) flip.classList.toggle("flipped"); });
+  // interest cards: one flipped at a time, click or tap to flip
   $$(".j-card").forEach((c) => {
     c.addEventListener("click", () => {
       const was = c.classList.contains("flipped");
-      $$(".j-card.flipped").forEach((o) => o.classList.remove("flipped"));
-      if (!was) c.classList.add("flipped");
+      $$(".j-card.flipped").forEach((o) => { o.classList.remove("flipped"); o.setAttribute("aria-pressed", "false"); });
+      if (!was) { c.classList.add("flipped"); c.setAttribute("aria-pressed", "true"); }
     });
     c.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); c.click(); } });
   });
