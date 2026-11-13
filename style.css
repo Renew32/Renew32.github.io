@@ -947,3 +947,4 @@ body.is-deep .nav.scrolled { background: rgba(2, 26, 29, 0.6); color: #e6fffa; }
   html { scroll-behavior: auto; }
   .reveal, .t-item { opacity: 1; transform: none; }
 }
+.hero-dot { margin-left: .02em; }
