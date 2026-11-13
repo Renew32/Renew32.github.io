@@ -1,5 +1,5 @@
 /* =========================================================
-   Antoine. — interactions
+   Antoine. interactions
    ========================================================= */
 (() => {
   "use strict";
@@ -22,8 +22,8 @@
   }
 
   /* =======================================================
-     Bubbles (canvas) — rise, wobble, react to the cursor,
-     and pop when clicked.
+     Bubbles (canvas): rise, wobble, slow down near the cursor
+     and pop with a click, a tap or a quick swipe.
      ======================================================= */
   const canvas = $("#bubbles");
   const ctx = canvas.getContext("2d");
@@ -100,7 +100,7 @@
     bubbles[i] = makeBubble();
     pops++;
     popCountEl.textContent = pops;
-    if (pops === 10) toast("🫧 10 bubbles popped — you're a natural!");
+    if (pops === 10) toast("🫧 10 bubbles popped, you're a natural!");
     if (pops === 50) toast("🐠 50 pops! Antoine would hire you.");
   }
 
@@ -113,18 +113,18 @@
 
     for (const b of bubbles) {
       b.phase += 0.02 * dt;
-      // gentle push away from the cursor
-      const dx = b.x - mouse.x, dy = b.y - mouse.y;
-      const d2 = dx * dx + dy * dy, R = 120;
+      // near the cursor a bubble slows down and leans in, so it is easy to catch
+      const dx = mouse.x - b.x, dy = mouse.y - b.y;
+      const d2 = dx * dx + dy * dy, R = 110;
+      let slow = 1;
       if (d2 < R * R) {
         const d = Math.sqrt(d2) || 1;
-        const f = (1 - d / R) * 0.9;
-        b.vx += (dx / d) * f;
-        b.y += (dy / d) * f * 2;
+        slow = 0.25 + 0.75 * (d / R);
+        b.vx += (dx / d) * 0.04;
       }
       b.vx *= 0.94;
-      b.x += (Math.sin(b.phase) * b.amp + b.vx) * dt;
-      b.y -= b.vy * dt;
+      b.x += (Math.sin(b.phase) * b.amp * slow + b.vx) * dt;
+      b.y -= b.vy * slow * dt;
       if (b.y < -b.r * 2) Object.assign(b, makeBubble());
       drawBubble(b, deep);
     }
@@ -170,14 +170,36 @@
   }, { passive: true });
   window.addEventListener("pointerleave", () => { mouse.x = mouse.y = -999; });
 
-  window.addEventListener("click", (e) => {
+  // a bubble counts as hit inside a generous halo around it
+  const hitRadius = (b) => Math.max(b.r + 22, 30);
+  function popAt(x, y) {
     let hit = false;
     for (let i = 0; i < bubbles.length; i++) {
       const b = bubbles[i];
-      const dx = e.clientX - b.x, dy = e.clientY - b.y;
-      if (dx * dx + dy * dy <= (b.r + 6) * (b.r + 6)) { popBubble(i); hit = true; break; }
+      const dx = x - b.x, dy = y - b.y, R = hitRadius(b);
+      if (dx * dx + dy * dy <= R * R) { popBubble(i); hit = true; }
     }
-    if (!hit && !e.target.closest("a, button, input, textarea, label, .flip-card")) {
+    return hit;
+  }
+  // a quick swipe of the mouse through a bubble pops it too
+  let lastMove = { x: 0, y: 0, t: 0 };
+  window.addEventListener("pointermove", (e) => {
+    if (e.pointerType !== "mouse") return;
+    const now = performance.now();
+    const speed = Math.hypot(e.clientX - lastMove.x, e.clientY - lastMove.y) / Math.max(1, now - lastMove.t);
+    lastMove = { x: e.clientX, y: e.clientY, t: now };
+    if (speed < 1.6) return;
+    for (let i = 0; i < bubbles.length; i++) {
+      const b = bubbles[i];
+      if (b.r < 6) continue; // ignore the tiny trail bubbles
+      const dx = e.clientX - b.x, dy = e.clientY - b.y;
+      if (dx * dx + dy * dy <= (b.r + 8) * (b.r + 8)) popBubble(i);
+    }
+  }, { passive: true });
+
+  window.addEventListener("pointerdown", (e) => {
+    const hit = popAt(e.clientX, e.clientY);
+    if (!hit && !e.target.closest("a, button, input, textarea, label, .flip-card, .j-card")) {
       for (let k = 0; k < 4; k++) {
         const b = makeBubble(e.clientX + (Math.random() - 0.5) * 30, e.clientY + (Math.random() - 0.5) * 20, 3 + Math.random() * 9);
         b.vy = 1 + Math.random() * 1.2;
@@ -239,6 +261,14 @@
   /* ---------- Flip card (tap support) ---------- */
   const flip = $("#flipCard");
   flip.addEventListener("click", (e) => { if (!e.target.closest("a")) flip.classList.toggle("flipped"); });
+  $$(".j-card").forEach((c) => {
+    c.addEventListener("click", () => {
+      const was = c.classList.contains("flipped");
+      $$(".j-card.flipped").forEach((o) => o.classList.remove("flipped"));
+      if (!was) c.classList.add("flipped");
+    });
+    c.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); c.click(); } });
+  });
   flip.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip.classList.toggle("flipped"); } });
 
   /* =======================================================
@@ -268,10 +298,10 @@
   ["home", "skills", "experience", "projects", "connect"].forEach((id) => { const s = document.getElementById(id); if (s) sectionIO.observe(s); });
 
   /* =======================================================
-     Skills: marquee + filterable toolbox
+     Skills: icon marquee
      ======================================================= */
   const ICON = (n) => `assets/icons/${n}.svg`;
-  const toolbox = [
+  const tools = [
     { n: "Python", i: "python", g: "lang" },
     { n: "Java", i: "java", g: "lang" },
     { n: "C++", i: "cplusplus", g: "lang" },
@@ -308,24 +338,8 @@
     { n: "English (fluent)", b: "bi-globe2", g: "soft" },
   ];
 
-  const chipsEl = $("#chips");
-  chipsEl.innerHTML = toolbox.map((t) =>
-    `<span class="chip" data-group="${t.g}">${t.i ? `<img src="${ICON(t.i)}" alt="" loading="lazy" />` : `<i class="bi ${t.b}"></i>`}${t.n}</span>`
-  ).join("");
-
-  $$(".filter").forEach((btn) => btn.addEventListener("click", () => {
-    $$(".filter").forEach((b) => { b.classList.toggle("active", b === btn); b.setAttribute("aria-selected", String(b === btn)); });
-    const f = btn.dataset.filter;
-    $$(".chip", chipsEl).forEach((chip, idx) => {
-      const show = f === "all" || chip.dataset.group === f;
-      chip.classList.toggle("hide", !show);
-      chip.classList.remove("pop");
-      if (show) { chip.style.animationDelay = `${(idx % 14) * 25}ms`; void chip.offsetWidth; chip.classList.add("pop"); }
-    });
-  }));
-
   const marquee = $("#marqueeTrack");
-  const mIcons = toolbox.filter((t) => t.i).map((t) => `<img src="${ICON(t.i)}" alt="" title="${t.n}" loading="lazy" />`).join("");
+  const mIcons = tools.filter((t) => t.i).map((t) => `<img src="${ICON(t.i)}" alt="" title="${t.n}" loading="lazy" />`).join("");
   marquee.innerHTML = mIcons + mIcons; // duplicated for a seamless loop
 
   /* ---------- 3D tilt + spotlight ---------- */
@@ -506,7 +520,7 @@
   $("#copyEmail").addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(EMAIL);
-      toast("📋 Email copied — talk soon!");
+      toast("📋 Email copied, talk soon!");
     } catch {
       window.location.href = `mailto:${EMAIL}`;
     }
@@ -521,7 +535,7 @@
     e.preventDefault();
     const f = e.target;
     const subject = encodeURIComponent(f.subject.value.trim());
-    const body = encodeURIComponent(`${f.message.value.trim()}\n\n— ${f.name.value.trim()}`);
+    const body = encodeURIComponent(`${f.message.value.trim()}\n\n${f.name.value.trim()}`);
     window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
     toast("🍾 Your bottle is on its way!");
   });
