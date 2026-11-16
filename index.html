@@ -1,663 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Antoine Missoup Konga · Portfolio</title>
-  <meta name="description" content="Antoine Missoup Konga, Software Engineering (Co-op) student at uOttawa. AI, Python, Java, SQL, vibe coding and leadership." />
-  <meta name="theme-color" content="#e9fbf5" />
-  <link rel="icon" type="image/png" href="assets/card/AS.png" />
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Antoine. Software Engineer, built to learn</title>
+  <meta name="description" content="Antoine Missoup Konga, Software Engineering (Co-op) student at uOttawa. An immersive portfolio: skills, experience, projects and what I'm into." />
+  <meta name="theme-color" content="#06101f" />
+  <link rel="icon" href="assets/card/AS.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@1,300;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/vendor/bootstrap-icons/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="style.css" />
+  <script type="importmap">{ "imports": { "three": "./assets/vendor/three/three.module.min.js" } }</script>
 </head>
+<body class="is-gated">
 
-<body>
-  <!-- Living bubbles (click them to pop!) -->
-  <canvas id="bubbles" aria-hidden="true"></canvas>
-  <div class="cursor-bubble" aria-hidden="true"></div>
-
-  <!-- Scroll progress -->
-  <div class="scroll-progress" id="scrollProgress"></div>
-
-  <!-- Depth gauge -->
-  <div class="depth-gauge" aria-hidden="true">
-    <div class="depth-track"><div class="depth-fill" id="depthFill"></div></div>
-    <span class="depth-value" id="depthValue">0 m</span>
+  <!-- ================= ENTRY GATE ================= -->
+  <div class="gate" id="gate" role="dialog" aria-label="Welcome">
+    <svg class="gate-jelly" viewBox="0 0 400 520" aria-hidden="true">
+      <path class="draw" d="M70 200 C70 90 140 40 200 40 C260 40 330 90 330 200 C312 214 296 206 282 214 C268 222 254 210 240 218 C226 226 214 212 200 220 C186 212 174 226 160 218 C146 210 132 222 118 214 C104 206 88 214 70 200 Z" />
+      <path class="draw d2" d="M120 160 C130 110 165 85 200 85 C235 85 270 110 280 160" />
+      <path class="draw d3" d="M150 222 C140 290 170 330 150 400 C138 440 160 470 150 500" />
+      <path class="draw d3" d="M185 226 C200 300 170 350 190 420 C200 460 182 480 190 510" />
+      <path class="draw d3" d="M218 226 C205 290 236 340 214 410 C204 450 226 470 216 505" />
+      <path class="draw d3" d="M252 220 C264 290 236 330 256 395 C268 435 248 465 258 495" />
+      <path class="draw d4" d="M100 212 C90 280 110 330 92 380" />
+      <path class="draw d4" d="M300 212 C312 280 290 330 308 380" />
+    </svg>
+    <div class="gate-inner">
+      <p class="gate-word">Antoine<span>.</span></p>
+      <button class="pill pill-lg" id="enterSound"><span>Enter with sound</span></button>
+    </div>
+    <button class="gate-quiet" id="enterQuiet">Enter without sound</button>
   </div>
 
-  <!-- Navigation -->
-  <header class="nav" id="nav">
-    <a class="brand" href="#home" aria-label="Back to top">
-      <span class="brand-text">Antoine</span><span class="brand-dot">.</span>
-    </a>
-    <nav class="nav-links" id="navLinks">
-      <a href="#skills" class="nav-link">Skills</a>
-      <a href="#experience" class="nav-link">Experience</a>
-      <a href="#projects" class="nav-link">Projects</a>
-      <a href="#connect" class="nav-link">Let's Connect</a>
-      <a href="Antoine_Resume.pdf" target="_blank" rel="noopener" class="btn btn-small magnetic">
-        <i class="bi bi-file-earmark-text"></i> Resume
-      </a>
-    </nav>
-    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+  <!-- ================= 3D SCENE ================= -->
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- ================= CHROME ================= -->
+  <header class="topbar">
+    <div class="topbar-pill glass">
+      <a href="#intro" class="brand" aria-label="Antoine, back to top">Antoine<span>.</span></a>
+      <span class="topbar-sep"></span>
+      <svg class="topbar-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a8 8 0 0 1 16 0c-1 .8-2 .2-3 .8s-2-.2-3 .4-2-.4-3 .2-2-.6-3-.2-2.2-.4-4-.2Z"/><path d="M9 12.5c-.6 2.5.6 4-.2 7M12 12.8c.4 2.6-.6 4.2 0 7.5M15 12.5c.6 2.5-.6 4 .2 7"/></svg>
+      <a href="#connect" class="topbar-cta">Let's talk</a>
+    </div>
+    <a class="pill pill-sm glass topbar-cv" href="Antoine_Resume.pdf" target="_blank" rel="noopener">CV <i class="bi bi-arrow-down-short"></i></a>
   </header>
 
-  <main>
-    <!-- ================= HERO ================= -->
-    <section class="hero" id="home">
-      <div class="hero-inner container">
-        <div class="hero-copy">
-          <p class="hero-hello reveal">
-            Hello, I'm
-          </p>
-          <h1 class="hero-name reveal" data-delay="1">
-            <span class="water-text" data-text="Antoine">Antoine</span><span class="brand-dot hero-dot">.</span>
-          </h1>
-          <p class="hero-role reveal" data-delay="2">
-            <span class="typed" id="typed">Software Engineering Student</span><span class="caret">|</span>
-          </p>
-          <p class="hero-desc reveal" data-delay="3">
-            Third-year Software Engineering (Co-op) student at uOttawa. I build full-stack products
-            and I'm especially interested in AI, the cloud and finance. Above all, I love learning new things: a new language,
-            a new framework or a whole new field, I'm always curious about what comes next.
-          </p>
-          <div class="hero-cta reveal" data-delay="4">
-            <a href="#projects" class="btn btn-primary magnetic"><i class="bi bi-water"></i> Dive into my work</a>
-            <a href="#connect" class="btn btn-ghost magnetic"><i class="bi bi-chat-dots"></i> Let's Connect</a>
-          </div>
-          <div class="hero-social reveal" data-delay="5">
-            <a href="https://www.linkedin.com/in/antoine-missoup/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-            <a href="mailto:antoinemissoupg@gmail.com" aria-label="Email"><i class="bi bi-envelope-fill"></i></a>
-            <a href="Antoine_Resume.pdf" target="_blank" rel="noopener" aria-label="Resume"><i class="bi bi-file-earmark-person-fill"></i></a>
-          </div>
-        </div>
+  <nav class="chapters glass" aria-label="Chapters">
+    <a href="#intro" data-ch="intro">Intro</a>
+    <a href="#skills" data-ch="skills">Skills</a>
+    <a href="#experience" data-ch="experience">Experience</a>
+    <a href="#leadership" data-ch="leadership">Leadership</a>
+    <a href="#projects" data-ch="projects">Projects</a>
+    <a href="#interests" data-ch="interests">Interests</a>
+    <a href="#calculator" data-ch="calculator">Calculator</a>
+    <a href="#connect" data-ch="connect">Let's Connect</a>
+  </nav>
 
-        <div class="hero-visual reveal" data-delay="2">
-          <div class="porthole">
-            <div class="ring ring-1"></div>
-            <div class="ring ring-2"></div>
-            <div class="flip-card" id="flipCard" tabindex="0" aria-label="Flip the card">
-              <div class="flip-inner">
-                <div class="flip-front">
-                  <img src="assets/card/AS.png" alt="Antoine's ace of spades card" class="pixel" />
-                </div>
-                <div class="flip-back">
-                  <i class="bi bi-file-earmark-person"></i>
-                  <h3>My Resume</h3>
-                  <p>The full story, in two pages.</p>
-                  <a href="Antoine_Resume.pdf" target="_blank" rel="noopener" class="btn btn-small"><i class="bi bi-download"></i> Download</a>
-                </div>
-              </div>
-            </div>
-            <span class="float-badge b1"><i class="bi bi-mortarboard-fill"></i> uOttawa · SE Co-op</span>
-            <span class="float-badge b2"><i class="bi bi-translate"></i> FR / EN</span>
-          </div>
-          <p class="flip-hint"><i class="bi bi-hand-index"></i> Hover / tap the ace</p>
-        </div>
+  <button class="pill pill-sm glass sound-toggle" id="soundToggle" aria-pressed="false">Sound on</button>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <!-- ================= STORY ================= -->
+  <main id="story">
+
+    <section class="chapter ch-intro" id="intro" data-ch="intro">
+      <div class="intro-title">
+        <h1 class="display split">Software Engineer.<em>Built to learn.</em></h1>
       </div>
+      <p class="caps intro-lead fade">
+        Third-year Software Engineering (Co-op) student at uOttawa. I build full-stack products
+        and I'm especially interested in AI, the cloud and finance. Above all, I love learning new things.
+      </p>
+      <div class="scroll-cue"><span>Scroll</span><i></i></div>
+    </section>
 
-      <a href="#skills" class="scroll-cue" aria-label="Scroll down">
-        <span class="cue-bubble"></span><span>Dive</span>
-      </a>
-
-      <div class="waves" aria-hidden="true">
-        <svg viewBox="0 0 1440 160" preserveAspectRatio="none">
-          <path class="wave w1" d="M0,80 C240,140 480,20 720,80 C960,140 1200,20 1440,80 L1440,160 L0,160 Z" />
-          <path class="wave w2" d="M0,100 C240,40 480,160 720,100 C960,40 1200,160 1440,100 L1440,160 L0,160 Z" />
-          <path class="wave w3" d="M0,120 C240,90 480,150 720,120 C960,90 1200,150 1440,120 L1440,160 L0,160 Z" />
-        </svg>
+    <section class="chapter ch-right" id="skills" data-ch="skills">
+      <div class="block">
+        <h2 class="title split">Skills</h2>
+        <p class="caps fade">
+          A jellyfish has no brain, yet its nerve net senses in every direction at once.
+          My stack works the same way: AI, Python, Java, SQL, vibe coding and leadership,
+          all wired together...
+        </p>
+        <div class="cta fade"><button class="pill" data-open="stack">The stack</button><button class="sq" data-open="stack" aria-label="Open the stack"><i class="bi bi-arrow-up-right"></i></button></div>
       </div>
     </section>
 
-    <!-- ================= SKILLS ================= -->
-    <section class="section skills" id="skills">
-      <div class="container">
-        <header class="section-head reveal">
-          <span class="eyebrow">What I bring to the surface</span>
-          <h2 class="section-title">Skills</h2>
-          <p class="section-sub">Six currents I swim in every day, and the tools that power them.</p>
-        </header>
-
-        <div class="skill-grid">
-          <article class="skill-card tilt reveal" data-delay="0">
-            <div class="skill-bubble"><i class="bi bi-cpu"></i></div>
-            <h3>AI</h3>
-            <p>Machine learning, NLP and LLM-powered features, from data prep to smart, useful products.</p>
-            <div class="mini-icons">
-              <img src="assets/icons/tensorflow.svg" alt="TensorFlow" title="TensorFlow" />
-              <img src="assets/icons/pytorch.svg" alt="PyTorch" title="PyTorch" />
-              <img src="assets/icons/pandas.svg" alt="pandas" title="pandas" />
-              <img src="assets/icons/jupyter.svg" alt="Jupyter" title="Jupyter" />
-            </div>
-          </article>
-
-          <article class="skill-card tilt reveal" data-delay="1">
-            <div class="skill-bubble"><img src="assets/icons/python.svg" alt="" /></div>
-            <h3>Python</h3>
-            <p>Back ends with Django, automation scripts and data work, from quick prototypes to clean, tested code.</p>
-            <div class="mini-icons">
-              <img src="assets/icons/django.svg" alt="Django" title="Django" />
-              <img src="assets/icons/numpy.svg" alt="NumPy" title="NumPy" />
-              <img src="assets/icons/pandas.svg" alt="pandas" title="pandas" />
-              <img src="assets/icons/playwright.svg" alt="Playwright" title="Playwright" />
-            </div>
-          </article>
-
-          <article class="skill-card tilt reveal" data-delay="2">
-            <div class="skill-bubble"><img src="assets/icons/java.svg" alt="" /></div>
-            <h3>Java</h3>
-            <p>Object-oriented design, Android apps and clean, tested software architecture.</p>
-            <div class="mini-icons">
-              <img src="assets/icons/android.svg" alt="Android" title="Android" />
-              <img src="assets/icons/firebase.svg" alt="Firebase" title="Firebase" />
-              <img src="assets/icons/sqlite.svg" alt="SQLite" title="SQLite" />
-              <img src="assets/icons/git.svg" alt="Git" title="Git" />
-            </div>
-          </article>
-
-          <article class="skill-card tilt reveal" data-delay="0">
-            <div class="skill-bubble"><i class="bi bi-flag-fill"></i></div>
-            <h3>Leadership</h3>
-            <p>Leading teams as Co-President of UOSSA: strategy, communication and bringing people together.</p>
-            <div class="mini-icons">
-              <i class="bi bi-people-fill" title="Team collaboration"></i>
-              <i class="bi bi-chat-quote-fill" title="Communication"></i>
-              <i class="bi bi-compass-fill" title="Strategic planning"></i>
-              <i class="bi bi-hourglass-split" title="Time management"></i>
-            </div>
-          </article>
-
-          <article class="skill-card tilt reveal" data-delay="1">
-            <div class="skill-bubble"><i class="bi bi-stars"></i></div>
-            <h3>VibeCode</h3>
-            <p>AI-assisted development: prompting, iterating and shipping polished products at high speed.</p>
-            <div class="mini-icons">
-              <img src="assets/icons/vscode.svg" alt="VS Code" title="VS Code" />
-              <img src="assets/icons/git.svg" alt="Git" title="Git" />
-              <img src="assets/icons/githubactions.svg" alt="CI/CD" title="CI/CD" />
-              <i class="bi bi-magic" title="Prompting"></i>
-            </div>
-          </article>
-
-          <article class="skill-card tilt reveal" data-delay="2">
-            <div class="skill-bubble"><i class="bi bi-database-fill"></i></div>
-            <h3>SQL</h3>
-            <p>Data modeling, queries and dashboards with MySQL, PostgreSQL, SQL Server and Power BI.</p>
-            <div class="mini-icons">
-              <img src="assets/icons/mysql.svg" alt="MySQL" title="MySQL" />
-              <img src="assets/icons/postgresql.svg" alt="PostgreSQL" title="PostgreSQL" />
-              <img src="assets/icons/microsoftsqlserver.svg" alt="SQL Server" title="SQL Server" />
-              <i class="bi bi-bar-chart-fill" title="Power BI"></i>
-            </div>
-          </article>
-        </div>
-
-        <!-- Marquee of icons -->
-        <div class="marquee reveal" aria-hidden="true">
-          <div class="marquee-track" id="marqueeTrack"></div>
-        </div>
-
+    <section class="chapter ch-left" id="experience" data-ch="experience">
+      <div class="block">
+        <h2 class="title split">Experience</h2>
+        <p class="caps fade">
+          Some jellyfish cross entire oceans just by reading the currents.
+          From cybersecurity to full-stack development, IT support and web content,
+          every role took me somewhere new...
+        </p>
+        <div class="cta fade"><button class="pill" data-open="journey">The journey</button><button class="sq" data-open="journey" aria-label="Open the journey"><i class="bi bi-arrow-up-right"></i></button></div>
       </div>
     </section>
 
-    <!-- ================= EXPERIENCE ================= -->
-    <section class="section experience" id="experience">
-      <div class="container">
-        <header class="section-head reveal">
-          <span class="eyebrow">My journey so far</span>
-          <h2 class="section-title">Experience</h2>
-          <p class="section-sub">From cybersecurity to full-stack to student leadership.</p>
-        </header>
+    <section class="chapter ch-right" id="leadership" data-ch="leadership">
+      <div class="block">
+        <h2 class="title split">Leadership</h2>
+        <p class="caps fade">
+          Jellyfish travel in blooms of thousands, moving as one.
+          As Co-President of UOSSA, I help a whole community of students
+          move in the same direction...
+        </p>
+        <div class="cta fade"><button class="pill" data-open="lead">In practice</button><button class="sq" data-open="lead" aria-label="Open leadership details"><i class="bi bi-arrow-up-right"></i></button></div>
+      </div>
+    </section>
 
-        <div class="tabs reveal" role="tablist">
-          <button class="tab active" data-tab="work" role="tab" aria-selected="true"><i class="bi bi-briefcase-fill"></i> Professional</button>
-          <button class="tab" data-tab="lead" role="tab" aria-selected="false"><i class="bi bi-people-fill"></i> Leadership</button>
-          <span class="tab-indicator"></span>
-        </div>
+    <section class="chapter ch-statement" id="statement" data-ch="projects">
+      <p class="statement split">I turn ideas into products, <em>one pulse at a time.</em></p>
+    </section>
 
-        <div class="timeline" id="timeline">
-          <div class="timeline-line"><div class="timeline-water" id="timelineWater"></div></div>
+    <section class="chapter ch-projects" id="projects" data-ch="projects">
+      <div class="projects-head">
+        <h2 class="title split">Discover <br />my projects</h2>
+        <p class="hint fade"><i class="bi bi-hand-index"></i> <span class="hint-desk">Pick a glowing number on the tentacles</span><span class="hint-mob">Pick a project</span></p>
+        <ol class="project-list fade" aria-label="Projects list">
+          <li><button data-project="0">CampusConnect</button></li>
+          <li><button data-project="1">UOSSA Website</button></li>
+          <li><button data-project="2">Service Website</button></li>
+          <li><button data-project="3">Flip &amp; Match</button></li>
+          <li><button data-project="4">E-commerce Store</button></li>
+          <li><button data-project="5">Sport Analytics</button></li>
+          <li><button data-project="6">Android App</button></li>
+        </ol>
+      </div>
+    </section>
 
-          <!-- Professional -->
-          <article class="t-item" data-group="work">
-            <div class="t-dot"><i class="bi bi-globe2"></i></div>
-            <div class="t-card tilt">
-              <span class="t-date">May 2026 – Aug 2026</span>
-              <h3>Web Content Management Assistant</h3>
-              <p class="t-org">University of Ottawa</p>
-              <ul>
-                <li>Updated and maintained website content and digital assets across multiple platforms.</li>
-                <li>Optimized web pages for search engines and user experience.</li>
-              </ul>
-              <div class="tags"><span>CMS</span><span>SEO</span><span>UX</span></div>
-            </div>
-          </article>
+    <section class="chapter ch-interests" id="interests" data-ch="interests">
+      <div class="center-head">
+        <h2 class="title split">Off the clock.<em>What I'm into.</em></h2>
+        <p class="caps fade">Pick a card, any card. Click or tap to flip it.</p>
+      </div>
+      <div class="hand fade" id="hand"></div>
+    </section>
 
-          <article class="t-item" data-group="work">
-            <div class="t-dot"><i class="bi bi-headset"></i></div>
-            <div class="t-card tilt">
-              <span class="t-date">Jan 2026 – Apr 2026</span>
-              <h3>IT Support Technician</h3>
-              <p class="t-org">University of Ottawa</p>
-              <ul>
-                <li>Provided friendly, timely support to faculty and students, resolving hardware and software issues.</li>
-                <li>Maintained clear documentation and explained solutions to a non-technical audience.</li>
-              </ul>
-              <div class="tags"><span>Support</span><span>Documentation</span><span>Communication</span></div>
-            </div>
-          </article>
-
-          <article class="t-item" data-group="work">
-            <div class="t-dot"><i class="bi bi-code-slash"></i></div>
-            <div class="t-card tilt">
-              <span class="t-date">Jan 2025 – Apr 2025</span>
-              <h3>Full-Stack Developer</h3>
-              <p class="t-org">Chanas Assurances S.A.</p>
-              <ul>
-                <li>Developed dynamic, responsive user interfaces with React.js.</li>
-                <li>Built and consumed REST APIs connecting the React front end to a Django back end.</li>
-                <li>Implemented Django logic for data handling, forms and validation with security best practices.</li>
-              </ul>
-              <div class="tags"><span>React</span><span>Django</span><span>REST APIs</span><span>Security</span></div>
-            </div>
-          </article>
-
-          <article class="t-item" data-group="work">
-            <div class="t-dot"><i class="bi bi-shield-lock-fill"></i></div>
-            <div class="t-card tilt">
-              <span class="t-date">Apr 2024 – Aug 2024</span>
-              <h3>Cybersecurity Consultant</h3>
-              <p class="t-org">GlorySec</p>
-              <ul>
-                <li>Assessed client security needs and recommended the most suitable tools and practices.</li>
-                <li>Researched and compared security solutions to find the best fit for the organization.</li>
-                <li>Presented clear recommendations to technical and non-technical stakeholders.</li>
-              </ul>
-              <div class="tags"><span>Cybersecurity</span><span>Consulting</span><span>Research</span></div>
-            </div>
-          </article>
-
-          <!-- Leadership -->
-          <article class="t-item" data-group="lead">
-            <div class="t-dot"><i class="bi bi-trophy-fill"></i></div>
-            <div class="t-card tilt">
-              <span class="t-date">Apr 2026 – Present</span>
-              <h3>Co-President</h3>
-              <p class="t-org">UOSSA</p>
-              <ul>
-                <li>Lead strategic initiatives and oversee association operations.</li>
-                <li>Foster community engagement and cultural exchange among students.</li>
-              </ul>
-              <div class="tags"><span>Leadership</span><span>Strategy</span><span>Community</span></div>
-            </div>
-          </article>
-
-          <article class="t-item" data-group="lead">
-            <div class="t-dot"><i class="bi bi-megaphone-fill"></i></div>
-            <div class="t-card tilt">
-              <span class="t-date">Sep 2025 – Apr 2026</span>
-              <h3>Director of Internal Communications</h3>
-              <p class="t-org">UOSSA</p>
-              <ul>
-                <li>Managed internal communications and coordinated member engagement initiatives.</li>
-                <li>Ensured effective information flow across the team.</li>
-              </ul>
-              <div class="tags"><span>Communication</span><span>Coordination</span></div>
-            </div>
-          </article>
-
-          <article class="t-item" data-group="lead">
-            <div class="t-dot"><i class="bi bi-broadcast"></i></div>
-            <div class="t-card tilt">
-              <span class="t-date">Sep 2025 – Apr 2026</span>
-              <h3>VP Deputy Marketing &amp; Communication</h3>
-              <p class="t-org">UOISA</p>
-              <ul>
-                <li>Supported marketing strategy and external communication to boost visibility and engagement.</li>
-              </ul>
-              <div class="tags"><span>Marketing</span><span>Outreach</span></div>
-            </div>
-          </article>
-        </div>
-
-        <!-- Education -->
-        <div class="edu-row">
-          <div class="edu-card reveal" data-delay="0">
-            <div class="edu-icon"><i class="bi bi-mortarboard-fill"></i></div>
-            <div>
-              <span class="t-date">Sep 2023 – Present</span>
-              <h4>BASc Software Engineering (Co-op)</h4>
-              <p>University of Ottawa · Engineering Management &amp; Entrepreneurship option</p>
-            </div>
+    <section class="chapter ch-calc" id="calculator" data-ch="calculator">
+      <div class="calc-head">
+        <p class="kicker fade">Ready to see the bigger picture?</p>
+        <h2 class="calc-title split">You've seen how I work. Now see what a co-op term could mean for your team.</h2>
+        <p class="kicker-sm fade">Estimate it in under a minute. Friendly estimates, not promises.</p>
+      </div>
+      <div class="calc fade">
+        <div class="calc-params glass">
+          <div class="calc-top"><h3>Parameters</h3>
+            <div class="seg" role="group" aria-label="Term"><button class="on" data-term="4">4 mo</button><button data-term="8">8 mo</button><button data-term="12">12 mo</button></div>
           </div>
+          <label class="range"><span>Hours per week</span><input type="range" id="rHours" min="20" max="40" step="1" value="37" /><output for="rHours">37</output><small><b>20</b><b>40</b></small></label>
+          <label class="range"><span>Team size</span><input type="range" id="rTeam" min="1" max="20" step="1" value="6" /><output for="rTeam">6</output><small><b>1</b><b>20</b></small></label>
+          <label class="range"><span>Share of time spent building (%)</span><input type="range" id="rBuild" min="20" max="90" step="5" value="60" /><output for="rBuild">60%</output><small><b>20</b><b>90</b></small></label>
+          <label class="range"><span>Coffee per day</span><input type="range" id="rCoffee" min="0" max="5" step="1" value="2" /><output for="rCoffee">2</output><small><b>0</b><b>5</b></small></label>
+        </div>
+        <div class="calc-results">
+          <h3>Results</h3>
+          <dl>
+            <div><dt>Hours of building</dt><dd id="oHours">0</dd></div>
+            <div><dt>Features shipped</dt><dd id="oFeatures">0</dd></div>
+            <div><dt>Bugs squashed</dt><dd id="oBugs">0</dd></div>
+            <div><dt>Teammates helped</dt><dd id="oTeam">0</dd></div>
+            <div><dt>Coffees turned into code</dt><dd id="oCoffee">0</dd></div>
+            <div><dt>Languages at the stand-up</dt><dd>FR + EN</dd></div>
+          </dl>
         </div>
       </div>
     </section>
 
-    <!-- ================= PROJECTS (deep sea, scroll-driven) ================= -->
-    <section class="deep" id="projects">
-      <div class="descent" aria-hidden="true"></div>
-
-      <!-- 1. Glowing sticky title + featured project rising over it -->
-      <div class="glow-stage" id="glowStage">
-        <div class="glow-sticky">
-          <h2 class="glow-title" id="glowTitle">PROJECTS</h2>
-        </div>
-
-        <div class="feature">
-          <div class="feature-copy" id="featureCopy">
-            <span class="feature-eyebrow">Featured project</span>
-            <h3 class="feature-title">CampusConnect.</h3>
-            <p class="feature-text">
-              A platform that brings university students together: discover clubs, events and
-              peers in one place, and make campus life feel connected. Designed and built end-to-end,
-              from the data model to the interface.
-            </p>
-            <a href="#" class="feature-link" data-soon>Explore CampusConnect <i class="bi bi-arrow-up-right"></i></a>
-          </div>
-
-          <div class="laptop" id="laptop">
-            <div class="lid" id="lid">
-              <div class="screen">
-                <div class="cc-app">
-                  <aside class="cc-side">
-                    <div class="cc-logo"><i class="bi bi-diagram-3-fill"></i> CampusConnect</div>
-                    <span class="cc-nav on"><i class="bi bi-house-door-fill"></i> Feed</span>
-                    <span class="cc-nav"><i class="bi bi-calendar-event"></i> Events</span>
-                    <span class="cc-nav"><i class="bi bi-people"></i> Clubs</span>
-                    <span class="cc-nav"><i class="bi bi-chat-dots"></i> Messages</span>
-                  </aside>
-                  <div class="cc-main">
-                    <div class="cc-top">
-                      <div class="cc-search"><i class="bi bi-search"></i> Find events, clubs, people…</div>
-                      <div class="cc-avatars"><span></span><span></span><span></span></div>
-                    </div>
-                    <div class="cc-hero">
-                      <div>
-                        <small>This week on campus</small>
-                        <strong>Hack Night @ STEM</strong>
-                      </div>
-                      <span class="cc-pill">+128 going</span>
-                    </div>
-                    <div class="cc-cards">
-                      <div class="cc-card c1"><i class="bi bi-code-square"></i><b>UOSSA</b><small>Workshop · Fri</small></div>
-                      <div class="cc-card c2"><i class="bi bi-music-note-beamed"></i><b>Open Mic</b><small>Sat · 7pm</small></div>
-                      <div class="cc-card c3"><i class="bi bi-lightbulb"></i><b>Study Squad</b><small>Algo · Mon</small></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="screen-sheen"></div>
-              </div>
-            </div>
-            <div class="base"><span class="notch"></span></div>
-            <div class="laptop-glow"></div>
-          </div>
-        </div>
+    <section class="chapter ch-connect" id="connect" data-ch="connect">
+      <h2 class="display-sm split">Ready to build something <em>together?</em></h2>
+      <div class="cta fade">
+        <a class="pill" href="mailto:antoinemissoupg@gmail.com">Let's talk</a><a class="sq" href="mailto:antoinemissoupg@gmail.com" aria-label="Email Antoine"><i class="bi bi-arrow-up-right"></i></a>
       </div>
-
-      <!-- 2. Interests: a hand of Balatro cards (dot matrix) -->
-      <div class="interests">
-        <h3 class="interests-title reveal">What I'm into.</h3>
-        <p class="interests-sub reveal" data-delay="1">Pick a card, any card. Click or tap to flip it.</p>
-        <div class="hand">
-          <div class="j-slot" style="--i:-3">
-            <div class="j-card reveal" data-delay="0" tabindex="0" role="button" aria-pressed="false" aria-label="Sports and Data">
-              <div class="j-inner">
-                <div class="j-front"><img src="assets/balatro/Runner.png" alt="Runner joker" class="pixel" loading="lazy" /></div>
-                <div class="j-back">
-                  <h4>Sports &amp; Data</h4>
-                  <p>Stats, analytics and the numbers behind the game. It's why Analiz exists.</p>
-                  <span class="j-tag chips">+ insights</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="j-slot" style="--i:-2">
-            <div class="j-card reveal" data-delay="1" tabindex="0" role="button" aria-pressed="false" aria-label="Entrepreneurship">
-              <div class="j-inner">
-                <div class="j-front"><img src="assets/balatro/Rough_Gem.png" alt="Rough Gem joker" class="pixel" loading="lazy" /></div>
-                <div class="j-back">
-                  <h4>Entrepreneurship</h4>
-                  <p>Startups, product thinking and turning rough ideas into real value.</p>
-                  <span class="j-tag money">+ $1 per idea</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="j-slot" style="--i:-1">
-            <div class="j-card reveal" data-delay="2" tabindex="0" role="button" aria-pressed="false" aria-label="Finance">
-              <div class="j-inner">
-                <div class="j-front"><img src="assets/balatro/The_Hermit.png" alt="The Hermit tarot card" class="pixel" loading="lazy" /></div>
-                <div class="j-back">
-                  <h4>Finance</h4>
-                  <p>Markets, investing and fintech: how money moves, and how tech is changing it.</p>
-                  <span class="j-tag money">x2 money</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="j-slot" style="--i:0">
-            <div class="j-card reveal" data-delay="0" tabindex="0" role="button" aria-pressed="false" aria-label="The world of tomorrow">
-              <div class="j-inner">
-                <div class="j-front"><img src="assets/balatro/Zodiac_Deck.png" alt="Zodiac Deck" class="pixel" loading="lazy" /></div>
-                <div class="j-back">
-                  <h4>The world of tomorrow</h4>
-                  <p>How tech will reshape the way we live, learn and work, and how to help build it.</p>
-                  <span class="j-tag chips">+ vision</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="j-slot" style="--i:1">
-            <div class="j-card reveal" data-delay="1" tabindex="0" role="button" aria-pressed="false" aria-label="AI and RAG">
-              <div class="j-inner">
-                <div class="j-front"><img src="assets/balatro/Voucher.png" alt="Spoon voucher" class="pixel" loading="lazy" /></div>
-                <div class="j-back">
-                  <h4>AI &amp; RAG</h4>
-                  <p>Spoon-feeding LLMs the right context so their answers are useful, accurate and up to date.</p>
-                  <span class="j-tag xmult">x2 answers</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="j-slot" style="--i:2">
-            <div class="j-card reveal" data-delay="2" tabindex="0" role="button" aria-pressed="false" aria-label="Cloud">
-              <div class="j-inner">
-                <div class="j-front"><img src="assets/balatro/Cloud_9.png" alt="Cloud 9 joker" class="pixel" loading="lazy" /></div>
-                <div class="j-back">
-                  <h4>Cloud</h4>
-                  <p>AWS, Azure, Docker and CI/CD: shipping apps that scale without breaking a sweat.</p>
-                  <span class="j-tag chips">+ scale</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="j-slot" style="--i:3">
-            <div class="j-card reveal" data-delay="0" tabindex="0" role="button" aria-pressed="false" aria-label="Quantum Computing">
-              <div class="j-inner">
-                <div class="j-front"><img src="assets/balatro/Superposition.png" alt="Superposition joker" class="pixel" loading="lazy" /></div>
-                <div class="j-back">
-                  <h4>Quantum Computing</h4>
-                  <p>Qubits, superposition and the algorithms that could change computing.</p>
-                  <span class="j-tag mult">+ curiosity</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="connect-links fade">
+        <button id="copyEmail" class="link"><i class="bi bi-envelope"></i> antoinemissoupg@gmail.com</button>
+        <a class="link" href="https://www.linkedin.com/in/antoine-missoup/" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a>
+        <a class="link" href="Antoine_Resume.pdf" target="_blank" rel="noopener"><i class="bi bi-file-earmark-person"></i> Resume (2 pages)</a>
       </div>
-
-      <!-- 3. Horizontal gallery driven by vertical scroll -->
-      <div class="hgallery" id="hgallery">
-        <div class="hgallery-sticky">
-          <div class="hgallery-head">
-            <h3>More from the deep.</h3>
-            <p>Keep scrolling, the reef moves sideways.</p>
-          </div>
-          <div class="hgallery-track" id="hTrack">
-            <article class="p-card">
-              <div class="p-art art-uossa">
-                <div class="p-art-glyph"><i class="bi bi-people-fill"></i><span>UOSSA</span></div>
-              </div>
-              <div class="p-body">
-                <span class="p-kind">Community · Website</span>
-                <h4>UOSSA Website</h4>
-                <p>The official website of the student association I co-lead: events, team and resources for software engineering students.</p>
-                <div class="p-tech"><span>Frontend</span><span>UI/UX</span><span>Content</span></div>
-                <a href="#" class="p-link" data-soon>Visit site <i class="bi bi-arrow-up-right"></i></a>
-              </div>
-            </article>
-
-            <article class="p-card">
-              <div class="p-art art-orange"><img src="assets/card/JOKO.webp" alt="" class="pixel" /></div>
-              <div class="p-body">
-                <span class="p-kind">Business · Website</span>
-                <h4>Service Website</h4>
-                <p>A professional presentation platform for a service business.</p>
-                <div class="p-tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
-                <a href="https://canadianc.onrender.com" target="_blank" rel="noopener" class="p-link">Visit site <i class="bi bi-arrow-up-right"></i></a>
-              </div>
-            </article>
-
-            <article class="p-card">
-              <div class="p-art art-violet"><img src="assets/card/JOKERV.webp" alt="" class="pixel" /></div>
-              <div class="p-body">
-                <span class="p-kind">Game</span>
-                <h4>Flip &amp; Match</h4>
-                <p>An interactive memory mini-game built with React.</p>
-                <div class="p-tech"><span>React</span><span>CSS</span></div>
-                <a href="https://flipnmatch.onrender.com" target="_blank" rel="noopener" class="p-link">Play <i class="bi bi-arrow-up-right"></i></a>
-              </div>
-            </article>
-
-            <article class="p-card">
-              <div class="p-art art-teal"><img src="assets/card/jOKHOLO.webp" alt="" class="pixel" /></div>
-              <div class="p-body">
-                <span class="p-kind">E-commerce</span>
-                <h4>E-commerce Store</h4>
-                <p>An online shop for digital and physical goods.</p>
-                <div class="p-tech"><span>Node.js</span><span>Full-Stack</span></div>
-                <a href="https://thriftgaming.onrender.com" target="_blank" rel="noopener" class="p-link">Visit store <i class="bi bi-arrow-up-right"></i></a>
-              </div>
-            </article>
-
-            <article class="p-card">
-              <div class="p-art art-night"><img src="assets/card/Rocketjok.webp" alt="" class="pixel" /></div>
-              <div class="p-body">
-                <span class="p-kind">Data</span>
-                <h4>Sport Analytics</h4>
-                <p>Data visualization for sport analytics.</p>
-                <div class="p-tech"><span>Python</span><span>Data Viz</span></div>
-                <a href="https://analiz-aff7.onrender.com" target="_blank" rel="noopener" class="p-link">Open app <i class="bi bi-arrow-up-right"></i></a>
-              </div>
-            </article>
-
-            <article class="p-card">
-              <div class="p-art art-sand"><img src="assets/card/ab.webp" alt="" class="pixel" /></div>
-              <div class="p-body">
-                <span class="p-kind">Mobile</span>
-                <h4>Android App</h4>
-                <p>A full mobile app in Java with SQLite storage and Firebase real-time sync.</p>
-                <div class="p-tech"><span>Java</span><span>Android</span><span>Firebase</span></div>
-              </div>
-            </article>
-
-            <article class="p-card p-more">
-              <div class="p-more-inner">
-                <i class="bi bi-plus-circle-dotted"></i>
-                <h4>Next one?</h4>
-                <p>Have an idea worth building? Let's make it together.</p>
-                <a href="#connect" class="btn btn-small">Let's Connect</a>
-              </div>
-            </article>
-          </div>
-          <div class="hgallery-progress"><span id="hProgress"></span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= LET'S CONNECT ================= -->
-    <section class="section connect" id="connect">
-      <div class="surface-waves" aria-hidden="true">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-          <path class="wave w1" d="M0,40 C240,100 480,0 720,50 C960,100 1200,10 1440,50 L1440,0 L0,0 Z" />
-          <path class="wave w2" d="M0,20 C240,70 480,0 720,30 C960,70 1200,0 1440,30 L1440,0 L0,0 Z" />
-        </svg>
-      </div>
-      <div class="container">
-        <header class="section-head reveal">
-          <span class="eyebrow">Back to the surface</span>
-          <h2 class="section-title">Let's Connect</h2>
-          <p class="section-sub">Internships, co-op terms, projects or just a good conversation, my inbox is open.</p>
-        </header>
-
-        <div class="connect-grid">
-          <div class="connect-cards">
-            <button class="c-card reveal" id="copyEmail" data-delay="0" type="button">
-              <span class="c-icon"><i class="bi bi-envelope-paper-heart-fill"></i></span>
-              <span class="c-text"><small>Email · click to copy</small><b>antoinemissoupg@gmail.com</b></span>
-              <i class="bi bi-copy c-arrow"></i>
-            </button>
-            <a class="c-card reveal" data-delay="1" href="https://www.linkedin.com/in/antoine-missoup/" target="_blank" rel="noopener">
-              <span class="c-icon"><i class="bi bi-linkedin"></i></span>
-              <span class="c-text"><small>LinkedIn</small><b>antoine-missoup</b></span>
-              <i class="bi bi-arrow-up-right c-arrow"></i>
-            </a>
-            <a class="c-card reveal" data-delay="2" href="Antoine_Resume.pdf" target="_blank" rel="noopener">
-              <span class="c-icon"><i class="bi bi-file-earmark-arrow-down-fill"></i></span>
-              <span class="c-text"><small>Resume</small><b>Download PDF</b></span>
-              <i class="bi bi-arrow-down c-arrow"></i>
-            </a>
-            <div class="status reveal" data-delay="3">
-              <span class="pulse"></span> Open to co-op &amp; internship opportunities
-            </div>
-          </div>
-
-          <form class="message reveal" id="messageForm" data-delay="1">
-            <h3><i class="bi bi-send-fill"></i> Send a message in a bottle</h3>
-            <label>
-              <span>Your name</span>
-              <input type="text" name="name" required placeholder="Jane Doe" autocomplete="name" />
-            </label>
-            <label>
-              <span>Subject</span>
-              <input type="text" name="subject" required placeholder="Co-op opportunity" />
-            </label>
-            <label>
-              <span>Message</span>
-              <textarea name="message" rows="4" required placeholder="Hi Antoine, …"></textarea>
-            </label>
-            <button class="btn btn-primary magnetic" type="submit"><i class="bi bi-water"></i> Launch the bottle</button>
-            <p class="form-note">Opens your email app with the message ready to send.</p>
-          </form>
-        </div>
-      </div>
+      <footer class="foot">
+        <span>Antoine. &copy; <span id="year"></span></span>
+        <span>Built with curiosity, Three.js and a lot of coffee.</span>
+      </footer>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="brand">
-        <span class="brand-text">Antoine</span><span class="brand-dot">.</span>
-      </div>
-      <p class="pop-counter"><i class="bi bi-circle"></i> Bubbles popped: <b id="popCount">0</b></p>
-      <div class="footer-social">
-        <a href="https://www.linkedin.com/in/antoine-missoup/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-        <a href="mailto:antoinemissoupg@gmail.com" aria-label="Email"><i class="bi bi-envelope-fill"></i></a>
-      </div>
-      <p class="copyright">© 2026 Antoine Missoup Konga. Crafted with code &amp; curiosity.</p>
-    </div>
-  </footer>
+  <!-- Project hotspots, positioned on the tentacles by app.js -->
+  <div class="hotspots" id="hotspots" aria-hidden="true"></div>
 
-  <button class="to-top" id="toTop" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
+  <!-- ================= DRAWER ================= -->
+  <div class="drawer-backdrop" id="backdrop"></div>
+  <aside class="drawer glass" id="drawer" aria-hidden="true" aria-labelledby="drawerTitle" role="dialog">
+    <button class="drawer-close" id="drawerClose" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+    <div class="drawer-body" id="drawerBody"></div>
+  </aside>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="app.js"></script>
+  <noscript><p class="noscript">This portfolio is interactive: please enable JavaScript.</p></noscript>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
